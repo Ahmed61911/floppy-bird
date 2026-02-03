@@ -33,11 +33,11 @@ def main():
     play_btn_rect = pygame.Rect(width / 2 - 100, height / 2 - 100, 200, 80)
     quit_btn_rect = pygame.Rect(width / 2 - 100, height / 2 + 0, 200, 80)
 
-    play_btn_surface = pygame.transform.scale(pygame.image.load('images/Play.png').convert() , (play_btn_rect.width, play_btn_rect.height))
-    quit_btn_surface = pygame.transform.scale(pygame.image.load('images/Quit.png').convert() , (quit_btn_rect.width, quit_btn_rect.height))
+    play_btn_surface = pygame.transform.scale(pygame.image.load('images/Play.png').convert_alpha() , (play_btn_rect.width, play_btn_rect.height))
+    quit_btn_surface = pygame.transform.scale(pygame.image.load('images/Quit.png').convert_alpha() , (quit_btn_rect.width, quit_btn_rect.height))
     play_btn_text = my_font.render(f"PLAY", False, (60, 60, 60))
     quit_btn_text = my_font.render(f"Quit", False, (10, 10, 10))
-    death_menu_surface = pygame.transform.scale(pygame.image.load('images/Death_bg.png').convert() , (width - 300, height - 200))
+    death_menu_surface = pygame.transform.scale(pygame.image.load('images/Death_bg.png').convert_alpha() , (width - 300, height - 200))
 
 
     def show_menu():
