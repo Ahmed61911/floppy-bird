@@ -1,6 +1,15 @@
 import pygame
 import math
 import random
+import sys
+import os
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 def main():
     pygame.init()
@@ -23,21 +32,21 @@ def main():
     x_pos = 80
 
 
-    my_font = pygame.font.SysFont('font/Pixeltype.ttf', 40)
+    my_font = pygame.font.SysFont(resource_path('font/Pixeltype.ttf'), 40)
 
     bg_scroll = 0
-    bg_surf = pygame.image.load('images/Bg.png').convert()
+    bg_surf = pygame.image.load(resource_path(('images/Bg.png'))).convert()
     bg_tiles = math.ceil(width / bg_surf.get_width()) + 1
 
     #Main menu rectangles
     play_btn_rect = pygame.Rect(width / 2 - 100, height / 2 - 100, 200, 80)
     quit_btn_rect = pygame.Rect(width / 2 - 100, height / 2 + 0, 200, 80)
 
-    play_btn_surface = pygame.transform.scale(pygame.image.load('images/Play.png').convert_alpha() , (play_btn_rect.width, play_btn_rect.height))
-    quit_btn_surface = pygame.transform.scale(pygame.image.load('images/Quit.png').convert_alpha() , (quit_btn_rect.width, quit_btn_rect.height))
+    play_btn_surface = pygame.transform.scale(pygame.image.load(resource_path('images/Play.png')).convert_alpha() , (play_btn_rect.width, play_btn_rect.height))
+    quit_btn_surface = pygame.transform.scale(pygame.image.load(resource_path('images/Quit.png')).convert_alpha() , (quit_btn_rect.width, quit_btn_rect.height))
     play_btn_text = my_font.render(f"PLAY", False, (60, 60, 60))
     quit_btn_text = my_font.render(f"Quit", False, (10, 10, 10))
-    death_menu_surface = pygame.transform.scale(pygame.image.load('images/Death_bg.png').convert_alpha() , (width - 300, height - 200))
+    death_menu_surface = pygame.transform.scale(pygame.image.load(resource_path('images/Death_bg.png')).convert_alpha() , (width - 300, height - 200))
 
 
     def show_menu():
@@ -95,7 +104,7 @@ def main():
 
     class Player:
         def __init__(self, player_x,player_y):
-            self.surface = pygame.image.load('images/Bird.png').convert_alpha()
+            self.surface = pygame.image.load(resource_path('images/Bird.png')).convert_alpha()
             self.surface = pygame.transform.scale(self.surface, (50, 50))
             self.player_x = player_x
             self.player_y = player_y
@@ -141,7 +150,7 @@ def main():
     class Ground:
         
         def __init__(self):
-            self.surface = pygame.image.load('images/Ground.png').convert()
+            self.surface = pygame.image.load(resource_path('images/Ground.png')).convert()
             self.gnd_x = 0
             self.gnd_y = height - self.surface.get_height()
             self.rect = self.surface.get_rect()
@@ -167,11 +176,11 @@ def main():
 
             self.pipe_x = pipe_x_pos
 
-            self.surface1 = pygame.transform.scale((pygame.image.load('images/Pipe.png').convert_alpha()), (150, 400))
+            self.surface1 = pygame.transform.scale((pygame.image.load(resource_path('images/Pipe.png')).convert_alpha()), (150, 400))
             self.pipe1_y = random.randint(200, 400)
             self.rect1 = self.surface1.get_rect()
 
-            self.surface2 = pygame.transform.rotate(pygame.transform.scale((pygame.image.load('images/Pipe.png').convert_alpha()), (150, 400)), 180)
+            self.surface2 = pygame.transform.rotate(pygame.transform.scale((pygame.image.load(resource_path('images/Pipe.png')).convert_alpha()), (150, 400)), 180)
             self.pipe2_y = self.pipe1_y - pipe_gap - self.surface2.get_height()
             self.rect2 = self.surface2.get_rect()
 
@@ -214,7 +223,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                exit()
+                sys.exit()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
@@ -226,7 +235,7 @@ def main():
 
                     elif quit_btn_rect.collidepoint(event.pos):
                         running = False
-                        exit()
+                        sys.exit()
 
 
 
