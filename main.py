@@ -108,8 +108,6 @@ def main():
             self.jumping = False
             self.cooldown = 0
         
-
-
         def jump(self, input):
             #trigger event listner
             if input[pygame.K_UP] and self.cooldown <= 0 and self.rect.top > 0:
@@ -299,4 +297,3 @@ def main():
 main()
 
 pygame.quit()
-    
